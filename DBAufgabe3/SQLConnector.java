@@ -1,6 +1,7 @@
 ﻿package src;
 
 import java.sql.Connection;
+import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -121,14 +122,11 @@ public abstract class SQLConnector {
      * (siehe auch Dokumentation des Datenbanktreibers)
      *  - Erstellt eine Verbindung mit Hilfe der Klassenvariablen.
      */
-    protected Connection getConnection() {
+    protected Connection getConnection() throws ClassNotFoundException, SQLException {
         // TODO begin
-    	//DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
-    	this.databaseURL = databaseURL;
-    	this.user = user;
-    	this.driverClassName = driverClassName;
-    	this.password = password;
-        return null;
+    	Connection con = DriverManager.getConnection(databaseURL);
+    	return con;
+    	//Statement statement = connection.createStatement();
         // TODO end
     }
 

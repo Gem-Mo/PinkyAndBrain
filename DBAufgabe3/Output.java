@@ -89,14 +89,14 @@ public class Output {
 	public static void resultToCsv(ResultSet rs, PrintStream out)
 			throws SQLException {
 		// TODO begin
-		while (!rs.wasNull()){
-			int i = 1;
-			if(!isQuotedType((int)rs.getObject(i))){
-				out.println(rs.getObject(i));
+		while (!rs.next()){
+			int column = 1;
+			if(!isQuotedType((int)rs.getObject(column))){
+				out.print(rs.getObject(column) + "; ");
 			}else{
-				out.println("\"" + rs.getObject(i) + "\"");
+				out.print("\"" + rs.getObject(column) + "\"; ");
 			}
-			i++;
+			column++;
 		}
 		// TODO end
 	}
@@ -140,6 +140,10 @@ public class Output {
 
 		// Zeile mit den Typen ausgeben
 		// TODO begin
+		for (int column = 1; column <= columns; column++){
+			out.printf((column > 1 ? "| " : " ") + "%-" + width[column - 1]
+					+ "." + width[column - 1] + "s ", meta.getColumnType(column));
+		}
 		// TODO end
 
 		// Ausgabe horizontaler Abstandhalter
