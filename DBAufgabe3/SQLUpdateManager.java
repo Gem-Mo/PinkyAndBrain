@@ -57,6 +57,7 @@ public class SQLUpdateManager  {
      * Die verwendete SQL Verbindung.
      */
     private Connection connection;
+    private Statement statement;
 
     /**
      * Der Konstruktor, löst den Update-Vorgang aus.
@@ -80,6 +81,7 @@ public class SQLUpdateManager  {
             throw new SQLException(err);
         }
         // TODO begin
+        this.connection.close();
         // TODO end
     }
 
@@ -92,7 +94,16 @@ public class SQLUpdateManager  {
      */
     private boolean hasTable(String table) throws SQLException {
         // TODO begin
-        //return false;
+        statement = connection.createStatement();
+        try{
+            ResultSet supp = statement.executeQuery("SELECT * FROM " + table + " ;");
+            statement.close();
+
+        } catch (SQLSyntaxErrorException e){
+            System.out.println("Tabelle existiert nicht");
+            return false;
+        }
+        return true;
         // TODO end
     }
 
@@ -120,12 +131,12 @@ public class SQLUpdateManager  {
         connection.setAutoCommit(false);
         
         //Tabelle farbe anlegen
-        Statement statement = connection.createStatement();
+        statement = connection.createStatement();
+        connection.setSavepoint();
+
         try {
             statement.executeUpdate("DROP TABLE farbe");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         statement.executeUpdate("CREATE TABLE farbe(nr INT PRIMARY KEY, name VARCHAR(32) UNIQUE NOT NULL,"
                 + "rot FLOAT DEFAULT 0.0 CHECK(rot >= 0.0 AND rot <= 1.0), gruen FLOAT DEFAULT 0.0 CHECK(gruen >= 0.0 AND gruen <= 1.0),"
                 + "blau FLOAT DEFAULT 0.0 CHECK(blau >= 0.0 AND blau <= 1.0))");
@@ -173,9 +184,14 @@ public class SQLUpdateManager  {
         System.out.println("Column 'farbe' removed from 'teilestamm'");
  
         connection.commit();
+        // TODO end
+        } catch (SQLException e) {
+            connection.rollback();
+            e.printStackTrace();
+        }
+
         statement.close();
         connection.close();
-        // TODO end
     }
 
     /**
