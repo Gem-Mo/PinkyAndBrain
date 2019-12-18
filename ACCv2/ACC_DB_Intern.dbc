@@ -1,0 +1,184 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+
+
+BO_ 2147484672 Manual_Slowdown: 1 Vector__XXX
+ SG_ PedalTravel_Manual_Slowdown : 0|6@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147485184 ACC_Slowdown: 1 Vector__XXX
+ SG_ PedalTravel_ACC_Slowdown : 0|5@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147485008 Car1_State: 7 Vector__XXX
+ SG_ Speed_Car1_Current : 8|8@1+ (1,0) [0|250] "" Vector__XXX
+ SG_ Position_Car1 : 16|32@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Lane_Car1_Current : 0|2@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147485009 Car2_State: 7 Vector__XXX
+ SG_ Lane_Car2_Current : 40|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Speed_Car2_Current : 32|8@1+ (1,0) [0|250] "" Vector__XXX
+ SG_ Position_Car2 : 0|32@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147485120 Lane_Change: 1 Vector__XXX
+ SG_ Lane_Change_Direction : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147484864 Manual_Accelerate: 1 Vector__XXX
+ SG_ PedalTravel_Manual_Accelerate : 0|6@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147484832 ACC_Accelerate: 1 Vector__XXX
+ SG_ PedalTravel_ACC_Accelerate : 0|5@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147484144 Speed_Adjust: 1 Vector__XXX
+ SG_ Speed_Adjust : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 2147484320 Display_State: 7 Vector__XXX
+ SG_ Speed_Adjusted : 8|8@1+ (1,0) [30|200] "" Vector__XXX
+ SG_ Distance_Adjusted : 1|7@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ ACC_State : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147485088 ACC_State: 1 Vector__XXX
+ SG_ ACC_State : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147484064 Distance_Adjust: 4 Vector__XXX
+ SG_ Distance_Adjust : 0|7@1+ (1,0) [0|127] "" Vector__XXX
+
+BO_ 2147485680 Manual_Brake: 1 Vector__XXX
+ SG_ PedalTravel_Manual_Brake : 0|6@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147485424 ACC_Brake: 1 Vector__XXX
+ SG_ PedalTravel_ACC_Brake : 0|5@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147485440 ACC_Error: 1 Vector__XXX
+ SG_ ACC_Error : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147485344 Distance_Current: 4 Vector__XXX
+ SG_ Distance_Current : 0|32@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+EV_ DUI_Brake_State: 0 [0|0] "" 0 1 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ DUI_Speed_Adjusted: 0 [0|0] "" 0 2 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ DUI_Speed_Current: 0 [0|0] "" 0 3 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ DUI_ACC_State: 0 [0|0] "" 0 4 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ DUI_ACC_Error: 0 [0|0] "" 0 5 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ DUI_Distance_s: 1 [0|0] "" 0 6 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ DUI_Distance_m: 0 [0|0] "" 0 7 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ DUI_Distance_Adjusted: 1 [0|0] "" 0 8 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ CUI_Lane_Right: 0 [0|0] "" 0 9 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ CUI_Lane_Left: 0 [0|0] "" 0 10 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ CUI_Speed_Plus: 0 [0|0] "" 0 11 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ CUI_Speed_Minus: 0 [0|0] "" 0 12 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ CUI_Accelerate: 0 [0|0] "" 0 13 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ CUI_Brake: 0 [0|0] "" 0 14 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ CUI_ACC_State: 0 [0|0] "" 0 15 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ CUI_Distance_Plus: 0 [0|0] "" 0 16 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ CUI_Distance_Minus: 0 [0|0] "" 0 17 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+CM_ SG_ 2147485008 Speed_Car1_Current "Current speed of car (in km/h)";
+CM_ SG_ 2147485008 Position_Car1 "Position of car (as long in cm) from the start.
+In cm, since m is inaccurate
+As long value, since float/double don't have a constant accuracy
+Max. range 2^32cm -> ~43000km, approx. one whole earth 
+circulation until the overflow happens
+
+";
+CM_ SG_ 2147485008 Lane_Car1_Current "2Bit -> 4 lanes
+rightmost = 0
+leftmost = 3";
+CM_ SG_ 2147485009 Lane_Car2_Current "2Bit -> 4 lanes
+rightmost = 0
+leftmost = 3";
+CM_ SG_ 2147485009 Speed_Car2_Current "Current speed of car (in km/h)";
+CM_ SG_ 2147485009 Position_Car2 "Position of car (as long in cm) from the start.
+In cm, since m is inaccurate
+As long value, since float/double don't have a constant accuracy
+Max. range 2^32cm -> ~43000km, approx. one whole earth 
+circulation until the overflow happens";
+CM_ SG_ 2147485120 Lane_Change_Direction "Change of lane
+0 = to the right
+1 = to the left";
+CM_ SG_ 2147484864 PedalTravel_Manual_Accelerate "Force of manual accelerate action";
+CM_ SG_ 2147484832 PedalTravel_ACC_Accelerate "Force of ACC accelerate action";
+CM_ SG_ 2147484144 Speed_Adjust "Configured speed of ACC (in km/h)
+";
+CM_ SG_ 2147484320 Speed_Adjusted "Configured speed of ACC (in km/h)
+Domain of values 30-200";
+CM_ SG_ 2147484320 Distance_Adjusted "Configured distance as integer (in 1/10 seconds)
+Float to inaccurate, calculations too complex";
+CM_ SG_ 2147484320 ACC_State "ACC state
+0 = ACC off
+1 = ACC on";
+CM_ SG_ 2147485088 ACC_State "ACC state
+0 = ACC off
+1 = ACC on";
+CM_ SG_ 2147484064 Distance_Adjust "Change of ACC configured distance from controls
+";
+CM_ SG_ 2147485680 PedalTravel_Manual_Brake "Force of manual break action";
+CM_ SG_ 2147485424 PedalTravel_ACC_Brake "Force of ACC break action";
+CM_ SG_ 2147485440 ACC_Error "Forwarding of an ACC Error.
+Principally dataless, since the Dataframe shows the presence
+of an 'Error'.";
+CM_ SG_ 2147485344 Distance_Current "Current distance to the next car on the same lane (in cm).";
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANoeStartDelay" 0;

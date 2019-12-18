@@ -1,0 +1,168 @@
+/*@@var:*/
+variables
+{
+    // ACC settings
+	byte speed_adjusted;	        // ACC configured speed (in km/h)
+	byte distance_adjusted;			// ACC configured distance (in 1/10 seconds)
+	byte acc = 0;
+	
+	// Messages
+	message Distance_Adjust distance;
+	message Speed_Adjust speed;
+	message ACC_State acc_state;
+	message Manual_Accelerate manual_accelerate;
+	message Manual_Brake manual_brake;
+	message Lane_Change lane_change;
+
+	// On every change of an environment variable (e.g. on the push of a button)
+	// an according message will be published on the bus
+}
+/*@@end*/
+
+/*@@msg:CAN1.ACC_DB_Intern::Display_State (0x2A0X):*/
+// Update with current ACC settings
+
+on message Display_State
+{
+	speed_adjusted = this.Speed_Adjusted;
+	distance_adjusted = this.Distance_Adjusted;
+	acc = this.ACC_State;
+}
+/*@@end*/
+
+/*@@envVar:CUI_ACC_State:*/
+// Change of ACC state, ACC on/off
+
+on envVar CUI_ACC_State
+{
+	if (getValue(CUI_ACC_State) == 1) 
+    {
+		if (acc) 
+        {
+			acc = 0;
+		}
+		else 
+        {
+			acc = 1;
+		}
+
+		acc_state.ACC_State = acc;
+
+		output(acc_state);
+	}
+}
+/*@@end*/
+
+/*@@envVar:CUI_Distance_Minus:*/
+// Lower ACC configured distance
+
+on envVar CUI_Distance_Minus
+{
+	if (getValue(CUI_Distance_Minus) == 1)
+    {
+		distance.Distance_Adjust = distance_adjusted - 1;
+
+		output(distance);
+	}
+}
+/*@@end*/
+
+/*@@envVar:CUI_Distance_Plus:*/
+// Raise ACC configured distance
+
+on envVar CUI_Distance_Plus
+{
+	if (getValue(CUI_Distance_Plus) == 1) 
+    {
+		distance.Distance_Adjust = distance_adjusted + 1;
+
+		output(distance);
+	}
+}
+/*@@end*/
+
+/*@@envVar:CUI_Break:*/
+// Manual breaking
+
+on envVar CUI_Brake
+{
+	if (getValue(CUI_Brake) == 1) 
+    {
+		manual_brake.PedalTravel_Manual_Brake = 40;
+
+		output(manual_brake);
+	}
+}
+/*@@end*/
+
+/*@@envVar:CUI_Accelerate:*/
+// Manual acceleration
+
+on envVar CUI_Accelerate
+{
+	if (getValue(CUI_Accelerate) == 1) 
+    {
+		manual_accelerate.PedalTravel_Manual_Accelerate = 40;
+
+		output(manual_accelerate);
+	}
+}
+/*@@end*/
+
+/*@@envVar:CUI_Speed_Minus:*/
+// Lower ACC configured speed
+
+on envVar CUI_Speed_Minus
+{
+	if (getValue(CUI_Speed_Minus) == 1) 
+    {
+		speed.Speed_Adjust = speed_adjusted - 5;
+
+		output(speed);
+	}
+}
+/*@@end*/
+
+/*@@envVar:CUI_Speed_Plus:*/
+// Raise ACC configured speed
+
+
+on envVar CUI_Speed_Plus
+{
+	if (getValue(CUI_Speed_Plus) == 1) 
+    {
+		speed.Speed_Adjust = speed_adjusted + 5;
+
+		output(speed);
+	}
+}
+/*@@end*/
+
+/*@@envVar:CUI_Lane_Left:*/
+// Change lane to the left
+
+on envVar CUI_Lane_Left
+{
+	if (getValue(CUI_Lane_Left) == 1) 
+    {
+		lane_change.Lane_Change_Direction = 1;
+
+		output(lane_change);
+	}
+}
+/*@@end*/
+
+/*@@envVar:CUI_Lane_Right:*/
+// Change lane to the right
+
+on envVar CUI_Lane_Right
+{
+	if (getValue(CUI_Lane_Right) == 1) 
+    {
+		lane_change.Lane_Change_Direction = 0;
+
+		output(lane_change);
+	}
+}
+/*@@end*/
+

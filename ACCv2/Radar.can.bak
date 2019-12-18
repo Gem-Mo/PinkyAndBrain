@@ -1,0 +1,387 @@
+/*@@var:*/
+variables
+{
+    // Current values of car
+	long position = 0;	                    // Current position (in cm from start)
+	byte lane = 0;	                        // Current lane (0-3)
+	int  speed = 100;	                    // Current speed (in km/h)
+	double range;			                // Covered distance since last calculation
+	long distance_current = 0x7FFFFFFF;	    // Distance to next car on same lane (in cm)
+
+	// Max. acceleration values (quite realistic)
+	const double POS_ACCELERATION = 2.0;	// 2m/s² ~10s on 100 km/h
+	const double NEG_ACCELERATION = 8.0;	// 8m/s² ~40m from 100 km/h
+    const double NO_ACCELERATION = 2.0;	    // 2m/s² ~40m from 100 km/h
+
+	// Messages
+	message Car1_State car1_state;
+	message Car2_State car2_state;
+	message CAN1.Distance_Current distance;
+
+	// Timers and constants
+    msTimer timer_dummy;                    // Timer for dummy vehicle position
+	msTimer timer_distance;	                // Publish current distance periodically
+	msTimer timer_wd_distance_car2;	        // Watchdog for current distance Car2
+	msTimer timer_wd_distance_car1;         // Watchdog for current distance Car1
+    msTimer timer_cars_state;		        // Periodically refresh of state of cars...
+    msTimer timer_brakelight;	            // Blinkfrequence
+    const byte TIMEOUT_BRAKELIGHT = 100;
+	const byte TIMEOUT_CARS_STATE = 10;     // ...every 10 ms
+	const byte TIMEOUT_WD_DISTANCE_CAR2 = 100;
+	const byte TIMEOUT_WD_DISTANCE_CAR1 = 100;
+	const byte TIMEOUT_DISTANCE = 10;
+    const byte TIMEOUT_DUMMY = 10;
+		
+    // Dummy vehicle values
+    const double dummy_speed = 150.0;       // Cruises constantly at 150 km/h
+	double       dummy_distance = 0;
+	double       dummy_accelleration;
+	byte         dummy_lane = 0;
+	long         dummy_position = 0;
+
+    // Breaklight values
+	int brakelightcount = 0;              // Occurences of breaklight
+    int brakesOn = 0;                     // Breaklight enabled
+	const int MAXBRAKELIGHT = 4;          // Max amount of breaklight count
+}
+/*@@end*/
+
+/*@@startStart:Start:*/
+on start
+{
+	// Periodically refresh of current distance
+	setTimer(timer_distance, TIMEOUT_DISTANCE);
+
+    // Calculation of dummy vehicle position
+	setTimer(timer_dummy, TIMEOUT_DUMMY);
+
+	// Periodically refresh of cars state
+	setTimer(timer_cars_state, TIMEOUT_CARS_STATE);
+}
+/*@@end*/
+
+/*@@caplFunc:accelerate(int):*///function
+// Speed up (increase speed)
+
+accelerate (int pedalTravel)
+{
+    double delta;
+		
+	if(speed < 250) 
+    {
+		delta = ((POS_ACCELERATION/0x3F)*pedalTravel);	// 0x3F = 6 Bit, range of pedal travel
+
+		if (delta < 1) 
+        {
+			delta = 1;
+		}
+
+		speed += delta;
+
+		if (speed > 250) 
+        {
+			speed = 250;
+		}
+	}
+}
+/*@@end*/
+
+/*@@caplFunc:decelerate(int):*///function
+// Slow down (decrease speed)
+
+decelerate (int pedalTravel)
+{
+    double delta;
+
+	if (speed > 0) 
+    {
+		delta = ((NEG_ACCELERATION/0x3F)*pedalTravel); // 0x3F = 6 Bit, range of pedal travel
+
+		if (delta < 1) 
+        {
+			delta = 1;
+	    }
+
+		speed -= delta;
+
+		if (speed < 0) 
+        {
+			speed = 0;
+		}
+	}
+}
+/*@@end*/
+
+/*@@msg:CAN1.ACC_DB_Intern::ACC_Brake (0x6F0X):*/
+// ACC requests to slow down
+
+on message ACC_Brake
+{
+    if (this.CAN == 1) 
+    {
+		// Break
+		decelerate(this.PedalTravel_ACC_Brake);
+
+        brakelightOn();
+	}
+}
+/*@@end*/
+
+/*@@msg:CAN1.ACC_DB_Intern::Manual_Brake (0x7F0X):*/
+// Manual deceleration
+
+on message Manual_Brake
+{
+	if (this.CAN == 1) 
+    {
+		// Break
+		decelerate(this.PedalTravel_Manual_Brake);
+
+        brakelightOn();
+	}
+}
+/*@@end*/
+
+/*@@msg:CAN1.ACC_DB_Intern::ACC_Accelerate (0x4A0X):*/
+// ACC requests to increase speed
+
+on message ACC_Accelerate
+{
+	accelerate(this.PedalTravel_ACC_Accelerate);
+}
+/*@@end*/
+
+/*@@msg:CAN1.ACC_DB_Intern::Manual_Accelerate (0x4C0X):*/
+// Manual acceleration
+
+on message Manual_Accelerate
+{
+    // Speed up
+	accelerate(this.PedalTravel_Manual_Accelerate);
+
+    // Stop breaklight timer
+    brakelightOff();
+}
+/*@@end*/
+
+/*@@msg:CAN1.ACC_DB_Intern::Lane_Change (0x5C0X):*/
+// Driver has changed the lane
+
+on message Lane_Change
+{
+	// Move right, if there is still a lane to the right
+	if ((lane > 0) && !this.Lane_Change_Direction) 
+    {	
+		lane--;
+	}
+
+	// Move left, if there is still a lane to the left
+	if ((lane < 3) && this.Lane_Change_Direction) 
+    {	
+		lane++;
+	}
+}
+/*@@end*/
+
+/*@@timer:timer_distance:*/
+// Publish current distance periodically
+
+on timer timer_distance
+{
+	// Reset timer
+	setTimer(timer_distance, TIMEOUT_DISTANCE);
+
+	// Publish new distance
+	distance.Distance_Current = distance_current;
+	
+    // Send distance message
+	output(distance);	
+}
+/*@@end*/
+
+/*@@timer:timer_dummy:*/
+// Timer for dummy vehicle position
+
+on timer timer_dummy
+{
+	// Reset timer
+	setTimer(timer_dummy, TIMEOUT_DUMMY);
+
+	// Calculate new position
+	dummy_distance = dummy_speed/3.6;	// m/s ==  cm/10ms
+	dummy_position += dummy_distance;
+
+    // Both cars on same lane
+	if (lane == dummy_lane) 
+    {
+		// Calculate distance
+		distance_current = dummy_position - position;
+
+		if ((distance_current <= 200) || (distance_current > 15000)) 
+        {
+			distance_current = 0x7FFFFFFF;	// Distance too large
+		}
+	}
+	else 
+    {
+			distance_current = 0x7FFFFFFF;	// lane free
+	}
+
+}
+/*@@end*/
+
+/*@@timer:timer_wd_distance_car2:*/
+// Data out of date, reset distance for Car2
+
+on timer timer_wd_distance_car2
+{
+    // Reset timer
+	setTimer(timer_wd_distance_car2, TIMEOUT_WD_DISTANCE_CAR2);
+
+	distance_current = 0xFFFF;	// Data out of date
+}
+/*@@end*/
+
+/*@@timer:timer_wd_distance_car1:*/
+// Data out of date, reset distance for Car1
+
+on timer timer_wd_distance_car1
+{
+    // Reset timer
+	setTimer(timer_wd_distance_car1, TIMEOUT_WD_DISTANCE_CAR1);
+
+	distance_current = 0xFFFF;	// Data out of date
+}
+/*@@end*/
+
+/*@@timer:timer_cars_state:*/
+// Periodically refresh of state of Car1 and Car2
+
+on timer timer_cars_state
+{
+	// Reset timer
+	setTimer(timer_cars_state, TIMEOUT_CARS_STATE);
+
+	// Calculate new position
+	range = speed/3.6;	// m/s ==  cm/10ms
+	position += range;
+
+	// Update values for Car1_State message
+	car1_state.Speed_Car1_Current = speed;
+	car1_state.Lane_Car1_Current = lane;
+	car1_state.Position_Car1 = position;
+
+    // Send Car1_State message
+	output(car1_state);
+
+	// Update values for Car2_State message
+	car2_state.Speed_Car2_Current = dummy_speed;
+	car2_state.Lane_Car2_Current = dummy_lane;
+    car2_state.Position_Car2 = dummy_position;
+
+    // Send Car2_State message
+	output(car2_state);
+}
+/*@@end*/
+
+/*@@timer:timer_brakelight:*/
+on timer timer_brakelight
+{
+	// Lamp on
+	putValue(DUI_Brake_State, 1);
+
+    if (brakelightcount < MAXBRAKELIGHT) 
+    {
+		brakelightcount++;
+        // Reset timer
+	    setTimer(timer_brakelight, TIMEOUT_BRAKELIGHT);
+	}
+    else
+    {
+        brakesOn = 0;
+        brakelightcount = 0;
+        putValue(DUI_Brake_State, 0);
+        cancelTimer(timer_brakelight);
+    }    
+}
+/*@@end*/
+
+/*@@caplFunc:brakelightOn():*///function
+brakelightOn ()
+{
+    if (brakesOn == 0)
+    {
+        brakesOn = 1;
+
+        setTimer(timer_brakelight, TIMEOUT_BRAKELIGHT);
+    }
+    else 
+    {
+        brakelightcount = 0;
+    }
+}
+/*@@end*/
+
+/*@@caplFunc:brakelightOff():*///function
+brakelightOff ()
+{
+    if (brakesOn == 1)
+    {
+    	cancelTimer(timer_brakelight);
+        putValue(DUI_Brake_State, 0);
+
+        brakesOn = 0;
+        brakelightcount = 0;
+    }
+}
+/*@@end*/
+
+/*@@caplFunc:slowdown(int):*///function
+slowdown (int pedalTravel)
+{
+    double delta;
+
+	if (speed > 0) 
+    {
+        if (pedalTravel < 4)
+        {
+    		delta = ((NO_ACCELERATION/0x3F) * pedalTravel); // 0x3F = 6 Bit, range of pedal travel
+
+    		if (delta < 1) 
+            {
+    			delta = 1;
+    	    }
+
+    		speed -= delta;
+
+    		if (speed < 0) 
+            {
+    			speed = 0;
+    		}
+        }
+	}
+}
+/*@@end*/
+
+/*@@msg:CAN1.ACC_DB_Intern::ACC_Slowdown (0x600X):*/
+on message ACC_Slowdown
+{
+    if (this.CAN == 1) 
+    {
+		// Slow down
+		slowdown(this.PedalTravel_ACC_Slowdown); 
+	}
+}
+/*@@end*/
+
+/*@@msg:CAN1.ACC_DB_Intern::Manual_Slowdown (0x400X):*/
+on message Manual_Slowdown
+{
+    if (this.CAN == 1) 
+    {
+		// Slow down
+		slowdown(this.PedalTravel_Manual_Slowdown);
+	}
+}
+/*@@end*/
+

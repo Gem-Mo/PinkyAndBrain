@@ -1,0 +1,343 @@
+variables
+{
+    // Current values
+	byte lane_current;              // Current lane
+	int  speed_current;	            // Current speed (in km/h)
+	long distance_current;			// Current distance (in cm)
+
+    // ACC settings
+	byte acc_state;                 // Current ACC state (0 = off, 1 = on)
+	byte speed_adjusted;	        // ACC configured speed (in km/h)
+	byte distance_adjusted;			// ACC configured distance (in 1/10 seconds)
+
+    // Interim values
+	float tmp_speed;	            // Current speed (in m/s)
+	int   tmp_distance_m;			// Current distance (in m)
+	float tmp_distance_s;		    // Current distance (in s)
+	
+    // Error values
+	int beepcount = 0;              // Occurences of beep
+	const int MAXBEEP = 4;          // Max amount of error sound
+
+	// Timers and constants
+	msTimer update;	                // periodische Aktualisierung der Anzeige
+    const byte TIMEOUT_UPDATE = 1;
+	Timer error;	                // Zeitraum für Fehleranzeige
+    const byte TIMEOUT_ERROR  = 3;
+	msTimer blink;	                // Hilfstimer für Blinkfrequenz
+    const byte TIMEOUT_BLINK  = 255;
+    msTimer timer_update;
+
+    // Car display
+	long position_Car1, position_Car2;
+	long lane_Car1, lane_Car2;
+
+	// Distance of cars
+	long distance;
+
+	// Distances on respective lanes (ahead (a) and back (b))
+	long distanceCar1_0a, distanceCar1_1a, distanceCar1_2a, distanceCar1_3a;
+	long distanceCar1_0b, distanceCar1_1b, distanceCar1_2b, distanceCar1_3b;
+	long distanceCar2_0a, distanceCar2_1a, distanceCar2_2a, distanceCar2_3a;
+	long distanceCar2_0b, distanceCar2_1b, distanceCar2_2b, distanceCar2_3b;
+
+	// Lane display
+	int laneCar1_0, laneCar1_1, laneCar1_2, laneCar1_3;
+	int laneCar2_0, laneCar2_1, laneCar2_2, laneCar2_3;
+}
+
+// Update display periodically
+on timer update
+{
+	// To transfer atomic values
+	putValue(DUI_Distance_Adjusted, (double) distance_adjusted/10);
+	putValue(DUI_ACC_State, acc_state);
+	putValue(DUI_Speed_Current, speed_current);
+	putValue(DUI_Speed_Adjusted, speed_adjusted);
+	
+	if (distance_current < 15000) {	// Limit to 150m (like Bosch-ACC)
+		
+		// Current distance in meters
+		tmp_distance_m = distance_current/100;
+		
+		// Current distance in seconds
+		tmp_speed = speed_current/3.6;
+		if (tmp_speed > 0) {
+			tmp_distance_s = (distance_current/100)/tmp_speed;
+			if (tmp_distance_s >= 10.0) {
+				tmp_distance_s = 0;
+			}
+		}
+		else {	// Car stopped
+			tmp_distance_s = 0;
+		}
+	}
+	
+	// Distance too big
+	else {
+		tmp_distance_m = 0;
+		tmp_distance_s = 0;
+	}
+
+	// Show values in display
+	putValue(DUI_Distance_m, tmp_distance_m);
+	putValue(DUI_Distance_s, tmp_distance_s);
+
+	// Reset timer
+	setTimer(update, TIMEOUT_UPDATE);
+}
+
+// Switch lamp in TIMEOUT_BLINK length
+on timer blink
+{
+	// Lamp on
+	if (getValue(DUI_ACC_Error) == 0) 
+    {
+		putValue(DUI_ACC_Error, 1);
+		// Additional acoustical signal
+		if (beepcount < MAXBEEP) 
+        {
+			msgBeep(5);
+			beepcount++;
+		}
+	}
+
+	// Lamp off
+	else 
+    {
+		putValue(DUI_ACC_Error, 0);
+	}
+
+	// Reset timer
+	setTimer(blink, TIMEOUT_BLINK);
+}
+
+// Stop error blink
+on timer error
+{
+	putValue(DUI_ACC_Error, 0);
+	beepcount = 0;
+	
+	// Stop blink timer
+	cancelTimer(blink);
+}
+
+on start
+{
+	// Update interval
+	setTimer(update, TIMEOUT_UPDATE);
+
+	// Periodically refresh of the display
+	setTimer(timer_update, TIMEOUT_UPDATE);
+}
+
+// Get settings
+on message Display_State
+{
+	acc_state = this.ACC_State;
+	speed_adjusted = this.Speed_Adjusted;
+	distance_adjusted = this.Distance_Adjusted;
+}
+
+// Get current distance
+
+on message Distance_Current
+{
+    distance_current = this.Distance_Current;
+}
+
+// Report ACC error
+
+on message ACC_Error
+{
+	write("%g", timeNowFloat());
+	// Set errorlamp for TIMEOUT_ERROR flashing
+	setTimer(error, TIMEOUT_ERROR);
+	setTimer(blink, TIMEOUT_BLINK);
+}
+
+// Get current state of Car1
+
+on message Car1_State
+{
+    // Get current data
+	lane_current = this.Lane_Car1_Current;
+    lane_Car1 = this.Lane_Car1_Current;
+	speed_current = this.Speed_Car1_Current;
+	position_Car1 = this.Position_Car1;
+
+	// Display data received
+	putValue(CTRL_Signal_Car1, 1);
+}
+
+// Get current state of Car2
+
+on message Car2_State
+{
+	// Get current data
+	position_Car2 = this.Position_Car2;
+	lane_Car2 = this.Lane_Car2_Current;
+
+	// Display data received
+	putValue(CTRL_Signal_Car2, 1);
+}
+
+// Periodically refresh of the display
+
+on timer timer_update
+{
+	// Reset timer
+	setTimer(timer_update, TIMEOUT_UPDATE);
+	
+	// Reset all distance values 0x8000->Lane free
+	distanceCar1_0b = 0x8000;
+	distanceCar1_1b = 0x8000;
+	distanceCar1_2b = 0x8000;
+	distanceCar1_3b = 0x8000;
+	distanceCar1_0a = 0x8000;
+	distanceCar1_1a = 0x8000;
+	distanceCar1_2a = 0x8000;
+	distanceCar1_3a = 0x8000;
+
+	distanceCar2_0b = 0x8000;
+	distanceCar2_1b = 0x8000;
+	distanceCar2_2b = 0x8000;
+	distanceCar2_3b = 0x8000;
+	distanceCar2_0a = 0x8000;
+	distanceCar2_1a = 0x8000;
+	distanceCar2_2a = 0x8000;
+	distanceCar2_3a = 0x8000;
+
+	laneCar1_0 = 0;
+	laneCar1_1 = 0;
+	laneCar1_2 = 0;
+	laneCar1_3 = 0;
+
+	laneCar2_0 = 0;
+	laneCar2_1 = 0;
+	laneCar2_2 = 0;
+	laneCar2_3 = 0;
+
+	// Calculate current distance
+	distance = (position_Car2 - position_Car1)/100;
+
+	// Set current distance values
+	if (lane_Car1 == lane_Car2)	// Cars on the same lane
+    {
+		
+		// Refresh values only on appropiate lanes
+		switch (lane_Car1) {
+			case 0:
+				if (distance < 0) 
+                {
+					distanceCar1_0b = -distance;
+					distanceCar2_0a = -distance;
+				}
+				else 
+                {
+					distanceCar1_0a = distance;
+					distanceCar2_0b = distance;
+				}
+				break;
+			case 1:
+				if (distance < 0) 
+                {
+					distanceCar1_1b = -distance;
+					distanceCar2_1a = -distance;
+				}
+				else 
+                {
+					distanceCar1_1a = distance;
+					distanceCar2_1b = distance;
+				}
+				break;
+			case 2:
+				if (distance < 0) 
+                {
+					distanceCar1_2b = -distance;
+					distanceCar2_2a = -distance;
+				}
+				else 
+                {
+					distanceCar1_2a = distance;
+					distanceCar2_2b = distance;
+				}
+				break;
+			case 3:
+				if (distance < 0) 
+                {
+					distanceCar1_3b = -distance;
+					distanceCar2_3a = -distance;
+				}
+				else 
+                {
+					distanceCar1_3a = distance;
+					distanceCar2_3b = distance;
+				}
+				break;
+			default:;
+
+		}
+	}
+		
+	// Set current lanes
+	switch(lane_Car1) 
+    {
+		case 0: laneCar1_0 = 1;
+				break;
+		case 1: laneCar1_1 = 1;
+				break;
+		case 2: laneCar1_2 = 1;
+				break;
+		case 3: laneCar1_3 = 1;
+				break;
+		default:;
+	}
+
+	switch(lane_Car2) 
+    {
+		case 0: laneCar2_0 = 1;
+				break;
+		case 1: laneCar2_1 = 1;
+				break;
+		case 2: laneCar2_2 = 1;
+				break;
+		case 3: laneCar2_3 = 1;
+				break;
+		default:;
+	}
+
+
+	// Update data in Current Status area of Main Display
+	putValue(CTRL_DistanceCar1_0a, distanceCar1_0a);
+	putValue(CTRL_DistanceCar2_0a, distanceCar2_0a);
+	putValue(CTRL_DistanceCar1_1a, distanceCar1_1a);
+	putValue(CTRL_DistanceCar2_1a, distanceCar2_1a);
+	putValue(CTRL_DistanceCar1_2a, distanceCar1_2a);
+	putValue(CTRL_DistanceCar2_2a, distanceCar2_2a);
+	putValue(CTRL_DistanceCar1_3a, distanceCar1_3a);
+	putValue(CTRL_DistanceCar2_3a, distanceCar2_3a);
+
+	putValue(CTRL_DistanceCar1_0b, distanceCar1_0b);
+	putValue(CTRL_DistanceCar2_0b, distanceCar2_0b);
+	putValue(CTRL_DistanceCar1_1b, distanceCar1_1b);
+	putValue(CTRL_DistanceCar2_1b, distanceCar2_1b);
+	putValue(CTRL_DistanceCar1_2b, distanceCar1_2b);
+	putValue(CTRL_DistanceCar2_2b, distanceCar2_2b);
+	putValue(CTRL_DistanceCar1_3b, distanceCar1_3b);
+	putValue(CTRL_DistanceCar2_3b, distanceCar2_3b);
+
+	putValue(CTRL_DistanceCar1, distance);
+	putValue(CTRL_DistanceCar2, -distance);
+
+	putValue(CTRL_LaneCar1_0, laneCar1_0);
+	putValue(CTRL_LaneCar1_1, laneCar1_1);
+	putValue(CTRL_LaneCar1_2, laneCar1_2);
+	putValue(CTRL_LaneCar1_3, laneCar1_3);
+
+	putValue(CTRL_LaneCar2_0, laneCar2_0);
+	putValue(CTRL_LaneCar2_1, laneCar2_1);
+	putValue(CTRL_LaneCar2_2, laneCar2_2);
+	putValue(CTRL_LaneCar2_3, laneCar2_3);
+}
+

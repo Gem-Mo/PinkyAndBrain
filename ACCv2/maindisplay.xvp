@@ -1,0 +1,811 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Panel Type="Vector.CANalyzer.Panels.PanelSerializer, Vector.CANalyzer.Panels.Serializer, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null">
+  <Object Type="Vector.CANalyzer.Panels.Runtime.Panel, Vector.CANalyzer.Panels.Common, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="Panel" Children="Controls" ControlName="Main Display">
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI0" ControlName="Display_ACC_State">
+      <Property Name="Name">SwitchControlBSI0</Property>
+      <Property Name="Size">10,10</Property>
+      <Property Name="Location">420,35</Property>
+      <Property Name="ImageFile">rot.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_Brake_State</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl1" Children="Controls">
+      <Property Name="Name">StaticTextControl1</Property>
+      <Property Name="Size">65,20</Property>
+      <Property Name="Location">350,30</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px, style=Bold</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">Brake on</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI2" ControlName="Display_ACC_State">
+      <Property Name="Name">SwitchControlBSI2</Property>
+      <Property Name="Size">10,10</Property>
+      <Property Name="Location">330,35</Property>
+      <Property Name="ImageFile">rot.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_Brake_State</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl3" ControlName="Car2Lane0Ahead">
+      <Property Name="Name">ProgressBarControl3</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">472,333</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar2_0a</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl4" ControlName="Car2Lane1Ahead">
+      <Property Name="Name">ProgressBarControl4</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">439,333</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar2_1a</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl5" ControlName="Car2Lane2Ahead">
+      <Property Name="Name">ProgressBarControl5</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">406,333</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar2_2a</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl6" ControlName="Car2Lane3Ahead">
+      <Property Name="Name">ProgressBarControl6</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">373,333</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar2_3a</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI7" ControlName="Display_LaneCar2_0">
+      <Property Name="Name">SwitchControlBSI7</Property>
+      <Property Name="Size">20,39</Property>
+      <Property Name="Location">478,491</Property>
+      <Property Name="ImageFile">auto.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_LaneCar2_0</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI8" ControlName="Display_LaneCar2_1">
+      <Property Name="Name">SwitchControlBSI8</Property>
+      <Property Name="Size">20,39</Property>
+      <Property Name="Location">446,491</Property>
+      <Property Name="ImageFile">auto.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_LaneCar2_1</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI9" ControlName="Display_LaneCar2_2">
+      <Property Name="Name">SwitchControlBSI9</Property>
+      <Property Name="Size">20,39</Property>
+      <Property Name="Location">413,491</Property>
+      <Property Name="ImageFile">auto.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_LaneCar2_2</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI10" ControlName="Display_LaneCar2_3">
+      <Property Name="Name">SwitchControlBSI10</Property>
+      <Property Name="Size">20,39</Property>
+      <Property Name="Location">379,490</Property>
+      <Property Name="ImageFile">auto.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_LaneCar2_3</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI11" ControlName="Display_LaneCar1_0">
+      <Property Name="Name">SwitchControlBSI11</Property>
+      <Property Name="Size">20,39</Property>
+      <Property Name="Location">160,491</Property>
+      <Property Name="ImageFile">auto.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_LaneCar1_0</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI12" ControlName="Display_LaneCar1_1">
+      <Property Name="Name">SwitchControlBSI12</Property>
+      <Property Name="Size">20,39</Property>
+      <Property Name="Location">128,491</Property>
+      <Property Name="ImageFile">auto.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_LaneCar1_1</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI13" ControlName="Display_LaneCar1_2">
+      <Property Name="Name">SwitchControlBSI13</Property>
+      <Property Name="Size">20,39</Property>
+      <Property Name="Location">95,491</Property>
+      <Property Name="ImageFile">auto.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_LaneCar1_2</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI14" ControlName="Display_LaneCar1_3">
+      <Property Name="Name">SwitchControlBSI14</Property>
+      <Property Name="Size">20,39</Property>
+      <Property Name="Location">61,490</Property>
+      <Property Name="ImageFile">auto.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_LaneCar1_3</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl15" ControlName="Car1Lane1Behind">
+      <Property Name="Name">ProgressBarControl15</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">122,533</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar1_1b</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl16" ControlName="Car2Lane0Behind">
+      <Property Name="Name">ProgressBarControl16</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">473,533</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar2_0b</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl17" ControlName="Car2Lane1Behind">
+      <Property Name="Name">ProgressBarControl17</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">439,533</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar2_1b</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl18" ControlName="Car2Lane2Behind">
+      <Property Name="Name">ProgressBarControl18</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">407,533</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar2_2b</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl19" ControlName="Car2Lane3Behind">
+      <Property Name="Name">ProgressBarControl19</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">374,533</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar2_3b</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl20" ControlName="Car1Lane0Behind">
+      <Property Name="Name">ProgressBarControl20</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">155,533</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar1_0b</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl21" ControlName="Car1Lane2Behind">
+      <Property Name="Name">ProgressBarControl21</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">89,533</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar1_2b</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl22" ControlName="Car1Lane3Behind">
+      <Property Name="Name">ProgressBarControl22</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">56,533</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar1_3b</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl23" ControlName="Car1Lane0Ahead">
+      <Property Name="Name">ProgressBarControl23</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">155,333</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar1_0a</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl24" ControlName="Car1Lane1Ahead">
+      <Property Name="Name">ProgressBarControl24</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">122,333</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar1_1a</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl25" ControlName="Car1Lane2Ahead">
+      <Property Name="Name">ProgressBarControl25</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">89,333</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar1_2a</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl26" ControlName="Display_Distance_Car2">
+      <Property Name="Name">ProgressBarControl26</Property>
+      <Property Name="Size">40,355</Property>
+      <Property Name="Location">303,332</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">-200</Property>
+      <Property Name="ValuePos">bottom</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Blue</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar2</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl27" ControlName="Display_Distance_Car1">
+      <Property Name="Name">ProgressBarControl27</Property>
+      <Property Name="Size">35,355</Property>
+      <Property Name="Location">222,333</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">-200</Property>
+      <Property Name="ValuePos">bottom</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Blue</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl28" Children="Controls">
+      <Property Name="Name">StaticTextControl28</Property>
+      <Property Name="Size">130,20</Property>
+      <Property Name="Location">378,306</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px, style=Bold</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">Signal on CAN-Bus</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI29" ControlName="Display_Signal_Car2">
+      <Property Name="Name">SwitchControlBSI29</Property>
+      <Property Name="Size">10,10</Property>
+      <Property Name="Location">512,309</Property>
+      <Property Name="ImageFile">rot.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_Signal_Car2</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI30" ControlName="Display_Signal_Car1">
+      <Property Name="Name">SwitchControlBSI30</Property>
+      <Property Name="Size">10,10</Property>
+      <Property Name="Location">193,308</Property>
+      <Property Name="ImageFile">rot.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_Signal_Car1</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl31" Children="Controls">
+      <Property Name="Name">StaticTextControl31</Property>
+      <Property Name="Size">127,20</Property>
+      <Property Name="Location">59,305</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px, style=Bold</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">Signal on CAN-Bus</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl32" Children="Controls">
+      <Property Name="Name">StaticTextControl32</Property>
+      <Property Name="Size">122,20</Property>
+      <Property Name="Location">378,283</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px, style=Bold</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">Car 2</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl33" Children="Controls">
+      <Property Name="Name">StaticTextControl33</Property>
+      <Property Name="Size">122,20</Property>
+      <Property Name="Location">59,284</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px, style=Bold</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">Car 1</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=7.5.53.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl34" ControlName="Car1Lane3Ahead">
+      <Property Name="Name">ProgressBarControl34</Property>
+      <Property Name="Size">30,155</Property>
+      <Property Name="Location">56,333</Property>
+      <Property Name="ValueForeColor">Black</Property>
+      <Property Name="ValueBackColor">ActiveBorder</Property>
+      <Property Name="OriginValue">0</Property>
+      <Property Name="Alignment">RightBottom</Property>
+      <Property Name="Maximum">200</Property>
+      <Property Name="Orientation">Vertical</Property>
+      <Property Name="Minimum">0</Property>
+      <Property Name="UseWindowsStyle">False</Property>
+      <Property Name="BarBackColor">ActiveBorder</Property>
+      <Property Name="BarForeColor">Red</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CTRL_DistanceCar1_3a</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl35" Children="Controls">
+      <Property Name="Name">GroupBoxControl35</Property>
+      <Property Name="Size">190,695</Property>
+      <Property Name="Location">598,13</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 16px</Property>
+      <Property Name="Text">Controls</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl36" Children="Controls">
+      <Property Name="Name">GroupBoxControl36</Property>
+      <Property Name="Size">585,700</Property>
+      <Property Name="Location">5,10</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 16px</Property>
+      <Property Name="Text">Current Status</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.AnalogGaugeControl, Vector.CANalyzer.Panels.AnalogGauge, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="AnalogGaugeControl37" ControlName="Speedometer">
+      <Property Name="Name">AnalogGaugeControl37</Property>
+      <Property Name="Size">205,185</Property>
+      <Property Name="Location">278,56</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_Speed_Current</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl38" Children="Controls">
+      <Property Name="Name">StaticTextControl38</Property>
+      <Property Name="Size">100,20</Property>
+      <Property Name="Location">653,400</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px, style=Bold</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">ACC Error</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI39" ControlName="Display_ACC_Error">
+      <Property Name="Name">SwitchControlBSI39</Property>
+      <Property Name="Size">10,10</Property>
+      <Property Name="Location">632,403</Property>
+      <Property Name="ImageFile">rot.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_ACC_Error</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl40" Children="Controls">
+      <Property Name="Name">StaticTextControl40</Property>
+      <Property Name="Size">105,20</Property>
+      <Property Name="Location">644,328</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">Distance [sec]</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl41" Children="Controls">
+      <Property Name="Name">StaticTextControl41</Property>
+      <Property Name="Size">105,20</Property>
+      <Property Name="Location">644,265</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">Speed</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl42" Children="Controls">
+      <Property Name="Name">StaticTextControl42</Property>
+      <Property Name="Size">30,20</Property>
+      <Property Name="Location">208,216</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px, style=Bold</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">s</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl43" Children="Controls">
+      <Property Name="Name">StaticTextControl43</Property>
+      <Property Name="Size">30,20</Property>
+      <Property Name="Location">208,180</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px, style=Bold</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">m</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.LCDControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="LCDControl44" ControlName="Display_Current_Distance_s">
+      <Property Name="Name">LCDControl44</Property>
+      <Property Name="Size">75,37</Property>
+      <Property Name="Location">128,198</Property>
+      <Property Name="NumberIntDigits">1</Property>
+      <Property Name="DecimalPlaces">1</Property>
+      <Property Name="BackColor">Black</Property>
+      <Property Name="ColorOn">Red</Property>
+      <Property Name="ColorOff">Black</Property>
+      <Property Name="SegmentStrength">3</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_Distance_s</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.LCDControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="LCDControl45" ControlName="Display_Current_Distance_m">
+      <Property Name="Name">LCDControl45</Property>
+      <Property Name="Size">95,37</Property>
+      <Property Name="Location">108,161</Property>
+      <Property Name="NumberIntDigits">3</Property>
+      <Property Name="DecimalPlaces">0</Property>
+      <Property Name="BackColor">Black</Property>
+      <Property Name="ColorOn">Red</Property>
+      <Property Name="ColorOff">Black</Property>
+      <Property Name="SegmentStrength">3</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_Distance_m</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl46" Children="Controls">
+      <Property Name="Name">GroupBoxControl46</Property>
+      <Property Name="Size">175,110</Property>
+      <Property Name="Location">93,136</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">Distance</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.LCDControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="LCDControl47" ControlName="Display_Adjusted_Distance">
+      <Property Name="Name">LCDControl47</Property>
+      <Property Name="Size">55,30</Property>
+      <Property Name="Location">686,351</Property>
+      <Property Name="NumberIntDigits">1</Property>
+      <Property Name="DecimalPlaces">1</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="ColorOn">Black</Property>
+      <Property Name="ColorOff">White</Property>
+      <Property Name="SegmentStrength">1</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_Distance_Adjusted</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.LCDControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="LCDControl48" ControlName="Display_Adjusted_Speed">
+      <Property Name="Name">LCDControl48</Property>
+      <Property Name="Size">75,30</Property>
+      <Property Name="Location">666,287</Property>
+      <Property Name="NumberIntDigits">3</Property>
+      <Property Name="DecimalPlaces">0</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="ColorOn">Black</Property>
+      <Property Name="ColorOff">White</Property>
+      <Property Name="SegmentStrength">1</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_Speed_Adjusted</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl49" Children="Controls">
+      <Property Name="Name">GroupBoxControl49</Property>
+      <Property Name="Size">125,150</Property>
+      <Property Name="Location">631,244</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">Settings</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl50" Children="Controls">
+      <Property Name="Name">StaticTextControl50</Property>
+      <Property Name="Size">65,20</Property>
+      <Property Name="Location">654,224</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px, style=Bold</Property>
+      <Property Name="TextAlign">TopLeft</Property>
+      <Property Name="BorderStyle">None</Property>
+      <Property Name="Text">ACC on</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControlBSI51" ControlName="Display_ACC_State">
+      <Property Name="Name">SwitchControlBSI51</Property>
+      <Property Name="Size">10,10</Property>
+      <Property Name="Location">633,227</Property>
+      <Property Name="ImageFile">rot.bmp</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_ACC_State</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">LeftRight</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl52" Children="Controls">
+      <Property Name="Name">GroupBoxControl52</Property>
+      <Property Name="Size">155,220</Property>
+      <Property Name="Location">618,203</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">ACC</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl53" Children="Controls">
+      <Property Name="Name">GroupBoxControl53</Property>
+      <Property Name="Size">176,87</Property>
+      <Property Name="Location">93,48</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">Speed km/h</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.LCDControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="LCDControl54" ControlName="Display_Current_Speed">
+      <Property Name="Name">LCDControl54</Property>
+      <Property Name="Size">140,58</Property>
+      <Property Name="Location">108,68</Property>
+      <Property Name="NumberIntDigits">3</Property>
+      <Property Name="DecimalPlaces">0</Property>
+      <Property Name="BackColor">Black</Property>
+      <Property Name="ColorOn">Lime</Property>
+      <Property Name="ColorOff">Black</Property>
+      <Property Name="SegmentStrength">4</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;DUI_Speed_Current</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl55" ControlName="CUI_Speed_Accelerate" Children="Controls">
+      <Property Name="Name">ButtonControl55</Property>
+      <Property Name="Size">86,25</Property>
+      <Property Name="Location">692,66</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">Accelerate</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CUI_Accelerate</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl56" Children="Controls">
+      <Property Name="Name">GroupBoxControl56</Property>
+      <Property Name="Size">156,249</Property>
+      <Property Name="Location">618,448</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">ACC Settings</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl57" ControlName="CUI_Speed_Brake" Children="Controls">
+      <Property Name="Name">ButtonControl57</Property>
+      <Property Name="Size">58,25</Property>
+      <Property Name="Location">630,65</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">Brake</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CUI_Brake</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl58" Children="Controls">
+      <Property Name="Name">GroupBoxControl58</Property>
+      <Property Name="Size">150,65</Property>
+      <Property Name="Location">619,41</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">Speed</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl59" ControlName="CUI_ACC_State" Children="Controls">
+      <Property Name="Name">ButtonControl59</Property>
+      <Property Name="Size">50,27</Property>
+      <Property Name="Location">673,498</Property>
+      <Property Name="Font">Arial, 16px</Property>
+      <Property Name="Text">*</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CUI_ACC_State</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl60" Children="Controls">
+      <Property Name="Name">GroupBoxControl60</Property>
+      <Property Name="Size">115,60</Property>
+      <Property Name="Location">640,472</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">ACC on/off</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl61" ControlName="CUI_Speed_Minus" Children="Controls">
+      <Property Name="Name">ButtonControl61</Property>
+      <Property Name="Size">33,28</Property>
+      <Property Name="Location">709,573</Property>
+      <Property Name="Font">Arial, 16px, style=Bold</Property>
+      <Property Name="Text">-</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CUI_Speed_Minus</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl62" ControlName="CUI_Speed_Plus" Children="Controls">
+      <Property Name="Name">ButtonControl62</Property>
+      <Property Name="Size">37,28</Property>
+      <Property Name="Location">658,573</Property>
+      <Property Name="Font">Arial, 16px, style=Bold</Property>
+      <Property Name="Text">+</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CUI_Speed_Plus</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl63" Children="Controls">
+      <Property Name="Name">GroupBoxControl63</Property>
+      <Property Name="Size">115,60</Property>
+      <Property Name="Location">640,548</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">Speed</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl64" ControlName="CUI_Distance_Minus" Children="Controls">
+      <Property Name="Name">ButtonControl64</Property>
+      <Property Name="Size">33,28</Property>
+      <Property Name="Location">707,648</Property>
+      <Property Name="Font">Arial, 16px, style=Bold</Property>
+      <Property Name="Text">-</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CUI_Distance_Minus</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl65" ControlName="CUI_Distance_Plus" Children="Controls">
+      <Property Name="Name">ButtonControl65</Property>
+      <Property Name="Size">37,28</Property>
+      <Property Name="Location">657,648</Property>
+      <Property Name="Font">Arial, 16px, style=Bold</Property>
+      <Property Name="Text">+</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CUI_Distance_Plus</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl66" Children="Controls">
+      <Property Name="Name">GroupBoxControl66</Property>
+      <Property Name="Size">115,60</Property>
+      <Property Name="Location">640,623</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">Distance</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl67" ControlName="CUI_Lane_Right" Children="Controls">
+      <Property Name="Name">ButtonControl67</Property>
+      <Property Name="Size">65,28</Property>
+      <Property Name="Location">701,138</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">right -&gt;</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CUI_Lane_Right</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl68" ControlName="CUI_Lane_Left" Children="Controls">
+      <Property Name="Name">ButtonControl68</Property>
+      <Property Name="Size">57,28</Property>
+      <Property Name="Location">631,138</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">&lt;- left</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;CUI_Lane_Left</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.2.36.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl69" Children="Controls">
+      <Property Name="Name">GroupBoxControl69</Property>
+      <Property Name="Size">150,60</Property>
+      <Property Name="Location">619,115</Property>
+      <Property Name="BackColor">255,255,255</Property>
+      <Property Name="Font">Arial, 13px</Property>
+      <Property Name="Text">Lane</Property>
+      <Property Name="ForeColor">0,0,0</Property>
+    </Object>
+    <Property Name="Panel">Panel</Property>
+    <Property Name="Size">802,717</Property>
+    <Property Name="BackColor">255,255,255</Property>
+  </Object>
+</Panel>
