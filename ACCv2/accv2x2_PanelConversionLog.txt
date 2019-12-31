@@ -1,15 +1,15 @@
 Date / Time
 ===========
-18.12.2019 / 12:47
+30.12.2019 / 10:12
 
 Conversion report:
 ==================
-Information: The panel 'D:\Embedded\Embedded SW\Aufgabe2\ACCv2\ACCv2\maindisplay_ver41.cnp' was converted successfully.
+Information: The panel 'C:\Users\Gem\Documents\Studium\Studium\Winter1920\EmbeddedSoftware\Labor\ACCv2\PinkyAndBrain\ACCv2\maindisplay_ver41.cnp' was converted successfully.
 
 [Added Panels]
 Following panels are added to the configuration:
-D:\Embedded\Embedded SW\Aufgabe2\ACCv2\ACCv2\maindisplay_ver41.xvp
+C:\Users\Gem\Documents\Studium\Studium\Winter1920\EmbeddedSoftware\Labor\ACCv2\PinkyAndBrain\ACCv2\maindisplay_ver41.xvp
 
 [Removed Panels]
 Following panels are removed from the configuration:
-D:\Embedded\Embedded SW\Aufgabe2\ACCv2\ACCv2\maindisplay_ver41.cnp
+C:\Users\Gem\Documents\Studium\Studium\Winter1920\EmbeddedSoftware\Labor\ACCv2\PinkyAndBrain\ACCv2\maindisplay_ver41.cnp

@@ -1,35 +1,123 @@
+/*@!Encoding:1252*/
 includes
 {
 
 }
 variables
 {
-  byte distance_adjusted;			// ACC configured distance (in 1/10 seconds)
-  message Distance_Adjust distance;
-  message Display_State display_state;
-}
-on message Distance_Adjust {
-  display_state.Distance_Adjusted = this.Distance_Adjust;
+  float distance;			// ACC configured distance (in 1/10 seconds)
+  byte speed;
+  long distance_curr;
+  byte lane_car1_current;
+  byte speed_car1_current;
+  byte position_car1;
+  byte acc_err;
+  float distance_s;
   
-   // putValue(DUI_Distance_Adjusted, distance_adjusted);    
-  sendDisplayState();
+  message Distance_Adjust distance_adjust;
+  message Distance_Current distance_current;
+  message Speed_Adjust speed_adjust;
+  message Display_State display_state;
+  message Car1_State car1_state;
+  message ACC_Error acc_error;
+  message ACC_Accelerate acc_accelerate;
+  message ACC_Brake acc_brake;
+  message ACC_Slowdown acc_slowdown;
 }
+
 
 on message ACC_State {
   display_state.ACC_State = this.ACC_State;
-  sendDisplayState();
+  output(display_state);
+}
+
+//Gem
+
+on message Car1_State {
+  lane_car1_current = this.Lane_Car1_Current;
+  speed_car1_current = this.Speed_Car1_Current;
+  position_car1 = this.Position_Car1;
+  
+  if (speed_car1_current < 25 && display_state.ACC_State == 1) {
+    display_state.ACC_State = 0;    
+    acc_err = 1;
+    acc_error.ACC_Error = acc_err;
+  }
+  output(display_state);
+  output(acc_error);
+}
+
+
+on message Distance_Adjust {
+  distance = this.Distance_Adjust;
+  //if (distance <= 30 && distance >= 10){
+    display_state.Distance_Adjusted = distance;
+   //}
+  output(display_state);
+}
+
+on message Distance_Current {
+  distance_curr = this.Distance_Current;
+  distance_s = (distance_curr / 100) / ((float)speed_car1_current / 3.6);     // conversion of distance_curr from cm to meter and 
+                                                                          // convertion of speed_car1_current from km/h to m/s
+  if (display_state.ACC_State == 1) {
+    write("%g", distance/10);
+    write("%g", distance_s);
+    if (distance <= 30 && distance >= 10){
+      //ToDo: else: was passiert über distance = 3: Anpassung an speed
+      if (distance/10 < distance_s) {
+        //ToDo: else: was passiert unter distance = 10: belassen bei distance = 10
+        if (speed <= 180 && speed >= 30){
+          if (speed < speed_car1_current) {
+            sendACCSlowdown();
+          }else {
+            sendACCAccelerate();
+          }
+        }
+      }else { 
+        sendACCSlowdown();
+      } 
+    }
+  }
 }
 
 on message Speed_Adjust {
-  display_state.Speed_Adjusted = this.Speed_Adjust;
-  sendDisplayState();
+  speed = this.Speed_Adjust;
+  //if (speed <= 180 && speed >= 30){
+  display_state.Speed_Adjusted = speed;
+  //} 
+  output(display_state);
 }
 
-sendDisplayState(){
-  //(DUI_Distance_Adjusted, distance_adjusted);
-  //TODO:
-  // display_state.ACC_State = x; 
-  // display_state.Distance_Adjusted = x;
-  // display_state.Speed_Adjusted = x;
-output(display_state);  
+on message Manual_Accelerate {
+  display_state.ACC_State = 0;
+  output(display_state);
 }
+
+on message Manual_Brake {
+  display_state.ACC_State = 0;
+  output(display_state);
+}
+
+
+
+sendACCAccelerate() {
+  acc_accelerate.PedalTravel_ACC_Accelerate = 1;
+  output(acc_accelerate);
+}
+
+sendACCBrake() {
+  acc_brake.PedalTravel_ACC_Brake = 1;
+  output(acc_brake);
+}
+
+sendACCSlowdown() {
+  acc_slowdown.PedalTravel_ACC_Slowdown = 1;
+  output(acc_slowdown);
+}
+
+sendSettings() {
+  output(display_state);
+}
+
+
