@@ -1,19 +1,21 @@
-/*@!Encoding:1252*/
-includes
-{
+/*@!Encoding:1252*/includes {
 
 }
-variables
-{
-  float distance;			// ACC configured distance (in 1/10 seconds)
+
+variables {
+  byte distance; // ACC configured distance (in 1/10 seconds)
   byte speed;
   long distance_curr;
   byte lane_car1_current;
   byte speed_car1_current;
+  byte lane_car2_current;
+  byte speed_car2_current;
   byte position_car1;
   byte acc_err;
+  byte acc;
   float distance_s;
-  
+  int counter = 0;
+
   message Distance_Adjust distance_adjust;
   message Distance_Current distance_current;
   message Speed_Adjust speed_adjust;
@@ -25,81 +27,101 @@ variables
   message ACC_Slowdown acc_slowdown;
 }
 
-
-on message ACC_State {
-  display_state.ACC_State = this.ACC_State;
-  output(display_state);
+on start {
+  sendSettings();
 }
 
-//Gem
+on message ACC_State {
+  if (speed_car1_current > 25 && speed_car1_current < 180) {
+    acc = this.ACC_State;
+    if (acc == 1) {
+      speed = 80;
+      distance = 20;
+    }
+
+    sendSettings();
+  }
+}
 
 on message Car1_State {
   lane_car1_current = this.Lane_Car1_Current;
   speed_car1_current = this.Speed_Car1_Current;
   position_car1 = this.Position_Car1;
-  
+
   if (speed_car1_current < 25 && display_state.ACC_State == 1) {
-    display_state.ACC_State = 0;    
+    display_state.ACC_State = 0;
     acc_err = 1;
     acc_error.ACC_Error = acc_err;
+    output(acc_error);
   }
-  output(display_state);
-  output(acc_error);
+  sendSettings();
 }
 
+on message Car2_State {
+  speed_car2_current = this.Speed_Car2_Current;
+  lane_car2_current = this.Lane_Car2_Current;
+}
 
 on message Distance_Adjust {
-  distance = this.Distance_Adjust;
-  //if (distance <= 30 && distance >= 10){
-    display_state.Distance_Adjusted = distance;
-   //}
-  output(display_state);
-}
-
-on message Distance_Current {
-  distance_curr = this.Distance_Current;
-  distance_s = (distance_curr / 100) / ((float)speed_car1_current / 3.6);     // conversion of distance_curr from cm to meter and 
-                                                                          // convertion of speed_car1_current from km/h to m/s
-  if (display_state.ACC_State == 1) {
-    write("%g", distance/10);
-    write("%g", distance_s);
-    if (distance <= 30 && distance >= 10){
-      //ToDo: else: was passiert über distance = 3: Anpassung an speed
-      if (distance/10 < distance_s) {
-        //ToDo: else: was passiert unter distance = 10: belassen bei distance = 10
-        if (speed <= 180 && speed >= 30){
-          if (speed < speed_car1_current) {
-            sendACCSlowdown();
-          }else {
-            sendACCAccelerate();
-          }
-        }
-      }else { 
-        sendACCSlowdown();
-      } 
+  if (acc == 1) {
+    if (this.Distance_Adjust >= 10 && this.Distance_Adjust <= 30) {
+      distance = this.Distance_Adjust;
     }
   }
 }
 
 on message Speed_Adjust {
-  speed = this.Speed_Adjust;
-  //if (speed <= 180 && speed >= 30){
-  display_state.Speed_Adjusted = speed;
-  //} 
-  output(display_state);
+  if (acc == 1) {
+    if (this.Speed_Adjust >= 30 && this.Speed_Adjust <= 180) {
+      speed = this.Speed_Adjust;
+    }
+  }
+}
+
+on message Distance_Current {
+  distance_curr = this.Distance_Current;
+  distance_s = ((distance_curr / 100) / ((float) speed_car1_current / 3.6))*10; // conversion of distance_curr from cm to meter and 
+                                                                                // convertion of speed_car1_current from km/h to m/s
+  if (acc == 1) {
+   
+    // Counter, damit Tacho Zeiger sich nicht zu schnell bewegt
+    counter++;
+    if ((counter % 10) != 0)
+  {
+    return;
+  }
+    // Zu nah am Vordermann
+    if (distance_s <= ((double) distance)) {
+      // Selbe Spur
+      if (lane_car1_current == lane_car2_current) {
+        // NÃ¤her als kritische Distanz von 0,7s
+        if (distance_s <= 7) {
+          sendACCBrake();
+        } else {
+          sendACCSlowdown();
+        }
+      }
+    } 
+    // Schneller als ACC
+    else if (speed_car1_current > speed) {     
+      sendACCSlowdown();
+    } 
+    // Langsamer als ACC
+    else if (speed_car1_current < speed) {
+      sendACCAccelerate();
+    }
+  }
 }
 
 on message Manual_Accelerate {
-  display_state.ACC_State = 0;
-  output(display_state);
+  acc = 0;
+  sendSettings();
 }
 
 on message Manual_Brake {
-  display_state.ACC_State = 0;
-  output(display_state);
+  acc = 0;
+  sendSettings();
 }
-
-
 
 sendACCAccelerate() {
   acc_accelerate.PedalTravel_ACC_Accelerate = 1;
@@ -117,7 +139,9 @@ sendACCSlowdown() {
 }
 
 sendSettings() {
+  display_state.ACC_State = acc;
+  display_state.Speed_Adjusted = speed;
+  display_state.Distance_Adjusted = distance;
+
   output(display_state);
 }
-
-
